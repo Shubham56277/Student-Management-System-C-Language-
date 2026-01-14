@@ -55,13 +55,16 @@ scanf("%d", &s.roll);
 
 printf("Enter Name: ");
 scanf(" %[^\n]", s.name); // reads the entire line of input (including spaces)
+//-----------------------------------------------------------------------------------
 //alternative for scaning full line including space is using fgets 
-/* printf("Enter Name: ");
+/* 
+printf("Enter Name: ");
 getchar();
 fgets(s.name, sizeof(s.name), stdin);
 -> to remove newline added by fgets 
-s.name[strcspn(s.name, "\n")] = '\0';
-    */
+s.name[strcspn(s.name, "\n")] = '\0';  
+*/
+//-----------------------------------------------------------------------------------    
 printf("Enter Marks: ");
 scanf("%f", &s.marks);
     
