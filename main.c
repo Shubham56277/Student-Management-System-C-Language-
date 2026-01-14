@@ -37,6 +37,8 @@ case 5: deletestudent(); break;
 default: printf("Invalid choice!\n");
   }
 }
+return 0;
+}
   void addstudent() {
     FILE *fileptr, *temp;
     struct Student s;
@@ -68,5 +70,20 @@ fclose(fileptr);
 printf("Student added successfully.\n");
 }
 
+void displaystudents() {
+    printf("under const\n");
+}
+
+void searchstudent() {
+    printf("under const\n");
+}
+
+void updatestudent() {
+    printf("under const\n");
+}
+
+void deletestudent() {
+    printf("under const\n");
+}
 
 
