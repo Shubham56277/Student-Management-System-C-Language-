@@ -81,7 +81,7 @@ void displaystudents() {
     struct Student s;
 
     fileptr = fopen("student.dat", "rb");
-    if (fp == NULL) {
+    if (fileptr == NULL) {
         printf("No records found.\n");
         return;
     }
