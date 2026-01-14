@@ -39,6 +39,8 @@ default: printf("Invalid choice!\n");
 }
 return 0;
 }
+
+//---------------------------------------------function for add student-------------------------------------------------------------
   void addstudent() {
     FILE *fileptr, *temp;
     struct Student s;
@@ -73,8 +75,25 @@ fclose(fileptr);
 printf("Student added successfully.\n");
 }
 
+//------------------------------------------function for display student-------------------------------------------------------------
 void displaystudents() {
-    printf("under const\n");
+    FILE *fileptr;
+    struct Student s;
+
+    fileptr = fopen("student.dat", "rb");
+    if (fp == NULL) {
+        printf("No records found.\n");
+        return;
+    }
+
+    printf("\nRoll\tName\t\tMarks\n");
+    printf("------------------------------------\n");
+
+    while (fread(&s, sizeof(s), 1, fileptr)) {
+        printf("%d\t%s\t\t%.2f\n", s.roll, s.name, s.marks);
+    }
+
+    fclose(fileptr);
 }
 
 void searchstudent() {
