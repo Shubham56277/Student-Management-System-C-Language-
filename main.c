@@ -37,7 +37,35 @@ case 5: deletestudent(); break;
 default: printf("Invalid choice!\n");
   }
 }
-return 0;
+  void addstudent() {
+    FILE *fileptr, *temp;
+    struct Student s;
+    int roll;
+    int found =0;
+    fileptr = fopen("student.dat","ab");
+    if (fileptr == NULL) {
+      printf("File error\n");
+      return;
+    }
+  
+printf("Enter Roll No: ");
+scanf("%d", &s.roll);
+
+printf("Enter Name: ");
+scanf(" %[^\n]", s.name); // reads the entire line of input (including spaces)
+//alternative for scaning full line including space is using fgets 
+/* printf("Enter Name: ");
+getchar();
+fgets(s.name, sizeof(s.name), stdin);
+-> to remove newline added by fgets 
+s.name[strcspn(s.name, "\n")] = '\0';
+    */
+printf("Enter Marks: ");
+scanf("%f", &s.marks);
+    
+fwrite(&s, sizeof(s), 1, fileptr);
+fclose(fileptr);
+printf("Student added successfully.\n");
 }
 
 
