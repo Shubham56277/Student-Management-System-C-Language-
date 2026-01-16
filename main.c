@@ -96,16 +96,112 @@ void displaystudents() {
     fclose(fileptr);
 }
 
+//------------------------------------------function for search student-------------------------------------------------------------
 void searchstudent() {
-    printf("under const\n");
+FILE *fileptr;
+struct Student s;
+int roll, found = 0;
+  
+printf("Enter Roll No to search: ");
+scanf("%d", &roll);
+
+fileptr = fopen("student.dat", "rb");
+if (fileptr == NULL) {
+printf("No records found.\n");
+return;
 }
 
+while (fread(&s, sizeof(s), 1, fileptr)) {
+if (s.roll == roll) {
+  printf("\nStudent Found!\n");
+  printf("Roll: %d\nName: %s\nMarks: %.2f\n",
+s.roll, s.name, s.marks);
+  found = 1;
+  break;
+  }
+} 
+  fclose(fileptr);
+if (!found) { printf("Student not found.\n"); }
+  
+}
+
+
+//------------------------------------------function for update student-------------------------------------------------------------
 void updatestudent() {
-    printf("under const\n");
+  FILE *fileptr, *temp;
+  struct Student s;
+  int roll, found = 0;
+  
+printf("Enter Roll No to update: ");
+scanf("%d", &roll);
+
+fileptr = fopen("student.dat", "rb");
+temp = fopen("temp.dat", "wb");
+if (fileptr == NULL || temp == NULL) {
+printf("File error\n");
+return;
+    }
+
+while (fread(&s, sizeof(s), 1, fileptr)) {
+if (s.roll == roll) {
+      printf("Enter New Name: ");
+      scanf(" %[^\n]", s.name);
+
+      printf("Enter New Marks: ");
+      scanf("%f", &s.marks);
+
+      found = 1;
+        }
+        fwrite(&s, sizeof(s), 1, temp);
+    }
+
+    fclose(fileptr);
+    fclose(temp);
+
+    remove("student.dat");
+    rename("temp.dat", "student.dat");
+
+    if (found)
+        printf("Student updated successfully.\n");
+    else
+        printf("Student not found.\n");
 }
 
+//------------------------------------------function for delete student-------------------------------------------------------------
 void deletestudent() {
-    printf("under const\n");
+    FILE *fileptr, *temp;
+    struct Student s;
+    int roll, found = 0;
+
+    printf("Enter Roll No to delete: ");
+    scanf("%d", &roll);
+
+    fileptr = fopen("student.dat", "rb");
+    temp = fopen("temp.dat", "wb");
+
+    if (fileptr == NULL || temp == NULL) {
+        printf("File error\n");
+        return;
+    }
+
+    while (fread(&s, sizeof(s), 1, fileptr)) {
+        if (s.roll != roll) {
+            fwrite(&s, sizeof(s), 1, temp);
+        } else {
+            found = 1;
+        }
+    }
+
+    fclose(fileptr);
+    fclose(temp);
+
+    remove("student.dat");
+    rename("temp.dat", "student.dat");
+
+    if (found)
+        printf("Student deleted successfully.\n");
+    else
+        printf("Student not found.\n");
 }
 
 
